@@ -9,18 +9,38 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
+	mavenLocal ()
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
 	maven { url 'https://repo.spring.io/snapshot' }
 }
 
 dependencies {
+	//internal modules
+	implementation project (':user')
+
+	//external libraries
+	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:'
+	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'junit:junit:4.12 '
+	testImplementation 'io.rest-assured:rest-assured-bom:5.2.1'
+}
+
+implementationKotlin {
+	kotlinOptions.jvmTarget = "1.8"
+}
+
+implementationTestKotlin {
+	kotlinOptions.jvmTarget = "1.8"
 }
 
 tasks.named('test') {
